@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Тест</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<!-- Шапка сайта -->
+<header class="site-header">
+    <h1 class="welcome-text">Добро пожаловать!</h1>
+    <div class="timer" id="timer">30</div>
+</header>
+
+<!-- Основное содержимое -->
+<main id="main-content">
+    <h2>Вопрос <span th:text="${questionNumber}"></span> из <span th:text="${totalQuestions}"></span></h2>
+    <form th:action="@{/test}" method="post">
+        <div class="question">
+            <p th:text="${question.text}"></p>
+            <div class="answer-buttons">
+                <div th:each="option : ${question.options}">
+                    <button class="animated-button" type="submit" name="answer" th:value="${option}" th:text="${option}"></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+
+<!-- Сообщение о провале теста -->
+<div id="fail-message" class="fail-message">
+    <h2>Время вышло! Тест провален.</h2>
+    <div class="button-container">
+        <a href="/reset" class="animated-button">Начать заново</a>
+        <a href="/" class="animated-button">Вернуться в меню</a>
+    </div>
+</div>
+
+<!-- Скрипт для таймера -->
+<script>
+    let timeLeft = 30; // Время на вопрос
+    const timerElement = document.getElementById("timer");
+    const mainContent = document.getElementById("main-content");
+    const failMessage = document.getElementById("fail-message");
+
+    // Функция для обновления таймера
+    function updateTimer() {
+        timerElement.textContent = timeLeft;
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval); // Остановить таймер
+            mainContent.style.display = "none"; // Скрыть вопросы
+            failMessage.style.display = "block"; // Показать сообщение о провале
+        }
+        timeLeft--;
+    }
+
+    // Запуск таймера
+    const timerInterval = setInterval(updateTimer, 1000);
+</script>
+</body>
+</html>
