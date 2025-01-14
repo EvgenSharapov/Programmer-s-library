@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Arrays;
 import java.util.List;
 
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+
 @Controller
 public class TestController {
 
@@ -60,8 +65,15 @@ public class TestController {
             new Question("Какой язык программирования используется для создания скриптов в Ansible?",
                     new String[]{"YAML", "Python", "Java", "Bash"})
     );
-    @GetMapping("/")
-    public String showMenu() {
+    @GetMapping("/index")
+    public String showMenu(Model model) {
+            // Получаем информацию о текущем аутентифицированном пользователе
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String username = authentication.getName(); // Имя пользователя
+
+            // Передаем имя пользователя в шаблон
+            model.addAttribute("username", username);
+
         return "index"; // Главная страница с меню
     }
 
@@ -99,4 +111,27 @@ public class TestController {
         session.setAttribute("currentQuestionIndex", 0);
         return "redirect:/test";
     }
+    @GetMapping("/logout-success")
+    public String logoutSuccess() {
+        return "logout"; // Страница подтверждения выхода
+    }
+    @GetMapping("/login")
+    public String login() {
+        return "login"; // Страница входа
+    }
+//    @GetMapping("/")
+//    public String home() {
+//        return "home"; // Главная страница
+//    }
+
+//    @GetMapping("/public")
+//    public String publicPage() {
+//        return "public"; // Публичная страница
+//    }
+
+//    @GetMapping("/private")
+//    public String privatePage() {
+//        return "private"; // Приватная страница
+//    }
+
 }
