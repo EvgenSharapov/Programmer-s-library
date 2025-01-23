@@ -24,6 +24,8 @@ public class TestController {
                     new String[]{"Java", "Python", "JavaScript", "C++"}),
             new Question("Какой язык программирования вы предпочитаете?",
                     new String[]{"Java", "Python", "JavaScript", "C++"}),
+            new Question("Какой язык программирования вы предпочитаете?",
+                    new String[]{"Java", "Python", "JavaScript", "C++"}),
             new Question("Какой фреймворк вам нравится?",
                     new String[]{"Spring", "Django", "React", "Vue"}),
             new Question("Какой тип данных используется для хранения целых чисел в Java?",
