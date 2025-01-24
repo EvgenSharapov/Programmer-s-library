@@ -5,7 +5,7 @@ body {
 }
 
 header {
-    background-color: #f8f9fa;
+    background-color: #333;
     padding: 10px;
     text-align: right;
 }
@@ -16,18 +16,25 @@ header {
 }
 
 #user-button {
-    background-color: #007bff;
+    background-color: #444;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px;
+    font-size: 20px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 50%; /* Делаем кнопку круглой */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #user-button:hover {
-    background-color: #0056b3;
+    background-color: #555;
 }
 
+/* Выпадающее меню */
 .dropdown-content {
     display: none;
     position: absolute;
@@ -37,20 +44,22 @@ header {
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
     border-radius: 5px;
+    overflow: hidden;
 }
 
 .dropdown-content a {
-    color: black;
+    color: #333;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    text-align: left;
 }
 
 .dropdown-content a:hover {
-    background-color: #f1f1f1;
+    background-color: #ddd;
 }
 
-/* Показываем меню при активации */
+/* Показ меню */
 .show {
     display: block;
 }
