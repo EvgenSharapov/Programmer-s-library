@@ -21,9 +21,9 @@ const menuContent2 = `
     <a href="#" id="logout-button">Выход</a>
 `;
 
-// Содержимое меню для третьей кнопки
 const menuContent3 = `
     <a href="#" id="add-test-button">Добавить тест</a>
+    <a href="#" id="show-tests-button">Вывести все тесты</a>
     <a href="#">Редактировать тест</a>
     <a href="#">Удалить тест</a>
 `;
@@ -146,3 +146,53 @@ document.getElementById('test-form').addEventListener('submit', function(event) 
             alert('Произошла ошибка при добавлении вопроса.');
         });
 });
+
+
+// Обработчик для кнопки "Вывести все тесты"
+document.addEventListener('click', function(event) {
+    if (event.target.id === 'show-tests-button') {
+        event.preventDefault(); // Предотвращаем стандартное поведение ссылки
+
+        // Отправляем запрос на сервер для получения всех вопросов
+        fetch('/api/questions')
+            .then(response => response.json())
+            .then(questions => {
+                // Отображаем вопросы на странице
+                displayQuestions(questions);
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                alert('Произошла ошибка при загрузке вопросов.');
+            });
+    }
+});
+
+// Функция для отображения вопросов на странице
+function displayQuestions(questions) {
+    const container = document.createElement('div');
+    container.id = 'questions-container';
+    container.innerHTML = '<h2>Все вопросы:</h2>';
+
+    questions.forEach((question, index) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question-item';
+        questionDiv.innerHTML = `
+            <p><strong>Вопрос ${index + 1}:</strong> ${question.text}</p>
+            <ul>
+                ${question.options.map((option, i) => `
+                    <li>${option} ${i === question.correctAnswerIndex ? '(Правильный ответ)' : ''}</li>
+                `).join('')}
+            </ul>
+        `;
+        container.appendChild(questionDiv);
+    });
+
+    // Удаляем старый контейнер, если он есть
+    const oldContainer = document.getElementById('questions-container');
+    if (oldContainer) {
+        oldContainer.remove();
+    }
+
+    // Добавляем новый контейнер на страницу
+    document.body.appendChild(container);
+}

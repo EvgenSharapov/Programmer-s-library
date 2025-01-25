@@ -18,7 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
             http
                     .authorizeHttpRequests((requests) -> requests
-                            .requestMatchers("/", "/login","/index","/api/**").permitAll() // Разрешаем доступ без авторизации
+                            .requestMatchers("/", "/login","/index","/api/questions").permitAll() // Разрешаем доступ без авторизации
                             .anyRequest().authenticated() // Все остальные запросы требуют авторизации
                     )
                     .formLogin((form) -> form
