@@ -1,9 +1,12 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import org.springframework.context.annotation.Bean;
+
 import java.util.List;
 
 @Entity
+
 public class Question {
 
     @Id
