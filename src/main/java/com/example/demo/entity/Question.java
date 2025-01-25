@@ -35,32 +35,36 @@ public class Question {
         return id;
     }
 
-    public void setId(Long id) {
+    public Question setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getText() {
         return text;
     }
 
-    public void setText(String text) {
+    public Question setText(String text) {
         this.text = text;
+        return this;
     }
 
     public List<String> getOptions() {
         return options;
     }
 
-    public void setOptions(List<String> options) {
+    public Question setOptions(List<String> options) {
         this.options = options;
+        return this;
     }
 
     public int getCorrectAnswerIndex() {
         return correctAnswerIndex;
     }
 
-    public void setCorrectAnswerIndex(int correctAnswerIndex) {
+    public Question setCorrectAnswerIndex(int correctAnswerIndex) {
         this.correctAnswerIndex = correctAnswerIndex;
+        return this;
     }
 
     @Override
