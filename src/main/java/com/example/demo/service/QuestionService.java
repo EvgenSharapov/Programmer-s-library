@@ -10,30 +10,21 @@ import java.util.List;
 @Service
 public class QuestionService {
 
-    private final QuestionRepository<Question> questionRepository;
+    private final QuestionRepository questionRepository;
 
     @Autowired
-    public QuestionService(QuestionRepository<Question> q) {
-        this.questionRepository = q;
+    public QuestionService(QuestionRepository questionRepository) {
+        this.questionRepository = questionRepository;
     }
 
     // Метод для сохранения вопроса
-    public Question saveQuestion(Question question) {
+    public Question saveQuestion(String text, List<String> options, int correctAnswerIndex) {
+        Question question = new Question(text, options, correctAnswerIndex);
         return questionRepository.save(question);
     }
 
     // Метод для получения всех вопросов
     public List<Question> getAllQuestions() {
         return questionRepository.findAll();
-    }
-
-    // Метод для получения вопроса по ID
-    public Question getQuestionById(Long id) {
-        return questionRepository.findById(id);
-    }
-
-    // Метод для удаления вопроса по ID
-    public void deleteQuestion(Long id) {
-        questionRepository.deleteById(id);
     }
 }

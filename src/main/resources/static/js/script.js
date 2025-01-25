@@ -108,3 +108,40 @@ window.addEventListener('click', function(event) {
         addTestForm.style.display = 'none';
     }
 });
+
+document.getElementById('test-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Предотвращаем стандартную отправку формы
+
+    // Собираем данные из формы
+    const question = document.getElementById('question').value;
+    const option1 = document.getElementById('option1').value;
+    const option2 = document.getElementById('option2').value;
+    const option3 = document.getElementById('option3').value;
+    const option4 = document.getElementById('option4').value;
+    const correctAnswer = document.querySelector('input[name="correct-answer"]:checked').value;
+
+    // Создаем объект с данными
+    const data = {
+        text: question,
+        options: [option1, option2, option3, option4],
+        correctAnswerIndex: parseInt(correctAnswer) - 1 // Преобразуем в индекс (0-based)
+    };
+
+    // Отправляем данные на сервер
+    fetch('/api/questions', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => response.json())
+        .then(result => {
+            alert('Вопрос успешно добавлен!');
+            console.log(result);
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            alert('Произошла ошибка при добавлении вопроса.');
+        });
+});
