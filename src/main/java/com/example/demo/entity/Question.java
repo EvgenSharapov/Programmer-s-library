@@ -18,7 +18,8 @@ public class Question {
     @ElementCollection
     private List<String> options; // Варианты ответов
 
-    private int correctAnswerIndex; // Индекс правильного ответа
+    private int correctAnswerIndex;// Индекс правильного ответа
+
 
     // Конструкторы
     public Question() {
@@ -29,6 +30,7 @@ public class Question {
         this.options = options;
         this.correctAnswerIndex = correctAnswerIndex;
     }
+
 
     // Геттеры и сеттеры
     public Long getId() {

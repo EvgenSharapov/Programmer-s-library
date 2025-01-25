@@ -13,7 +13,8 @@
 
 <!-- Основное содержимое -->
 <main id="main-content">
-    <h2>Вопрос <span th:text="${questionNumber}"></span> из <span th:text="${totalQuestions}"></span></h2>
+    <h2>Вопрос <span th:text="${questionNumber}"></span>из <span th:text=" ${totalQuestions}"></span></h2>
+    <h2>Правильных <span th:text=" ${correctAnswers}"></span>из <span th:text=" ${questionNumber}"></span></h2>
     <form th:action="@{/test}" method="post">
         <div class="question">
             <p th:text="${question.text}"></p>
@@ -25,6 +26,7 @@
         </div>
     </form>
 </main>
+
 
 <!-- Сообщение о провале теста -->
 <div id="fail-message" class="fail-message">
