@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Всплывающее меню с авторизацией</title>
-    <link rel="stylesheet" href="styles1.css">
+    <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -35,76 +35,39 @@
     </div>
 </header>
 
-<script>
-    // Добавляем иконку пользователя во вторую кнопку
-    const userButton2 = document.getElementById('user-button-2');
-    userButton2.innerHTML = '<i class="fas fa-user"></i>'; // Иконка пользователя из Font Awesome
+<!-- Форма для добавления теста -->
+<div id="add-test-form" class="add-test-form">
+    <h2>Добавить новый тест</h2>
+    <form id="test-form">
+        <div class="form-group">
+            <label for="question">Вопрос:</label>
+            <input type="text" id="question" name="question" required>
+        </div>
+        <div class="form-group">
+            <label for="option1">Вариант ответа 1:</label>
+            <input type="text" id="option1" name="option1" required>
+            <input type="radio" name="correct-answer" value="1"> Правильный
+        </div>
+        <div class="form-group">
+            <label for="option2">Вариант ответа 2:</label>
+            <input type="text" id="option2" name="option2" required>
+            <input type="radio" name="correct-answer" value="2"> Правильный
+        </div>
+        <div class="form-group">
+            <label for="option3">Вариант ответа 3:</label>
+            <input type="text" id="option3" name="option3" required>
+            <input type="radio" name="correct-answer" value="3"> Правильный
+        </div>
+        <div class="form-group">
+            <label for="option4">Вариант ответа 4:</label>
+            <input type="text" id="option4" name="option4" required>
+            <input type="radio" name="correct-answer" value="4"> Правильный
+        </div>
+        <button type="submit" class="create-button">Создать</button>
+    </form>
+</div>
 
-    // Общий контейнер для меню
-    const dropdownMenu = document.getElementById('dropdown-menu');
-
-    // Содержимое меню для первой кнопки
-    const menuContent1 = `
-        <a href="/test">Пройти тест</a>
-        <a href="#">Библиотека</a>
-    `;
-
-    // Содержимое меню для второй кнопки
-    const menuContent2 = `
-        <a href="#">Настройки</a>
-        <a href="#">Контакты</a>
-        <a href="#" id="logout-button">Выход</a>
-    `;
-
-    // Содержимое меню для третьей кнопки
-    const menuContent3 = `
-        <a href="#">Добавить тест</a>
-        <a href="#">Редактировать тест</a>
-        <a href="#">Удалить тест</a>
-    `;
-
-    // Обработчик для кнопки "Выход"
-    document.addEventListener('click', function(event) {
-        if (event.target.id === 'logout-button') {
-            event.preventDefault(); // Предотвращаем стандартное поведение ссылки
-            window.history.back(); // Возвращаемся на предыдущую страницу
-        }
-    });
-
-    // Обработчик для первой кнопки
-    const userButton1 = document.getElementById('user-button-1');
-    userButton1.addEventListener('click', function(event) {
-        event.stopPropagation(); // Останавливаем всплытие события
-        dropdownMenu.innerHTML = menuContent1; // Устанавливаем содержимое меню
-        dropdownMenu.classList.add('show'); // Показываем меню
-    });
-
-    // Обработчик для второй кнопки
-    userButton2.addEventListener('click', function(event) {
-        event.stopPropagation(); // Останавливаем всплытие события
-        dropdownMenu.innerHTML = menuContent2; // Устанавливаем содержимое меню
-        dropdownMenu.classList.add('show'); // Показываем меню
-    });
-
-    // Обработчик для третьей кнопки
-    const userButton3 = document.getElementById('user-button-3');
-    userButton3.addEventListener('click', function(event) {
-        event.stopPropagation(); // Останавливаем всплытие события
-        dropdownMenu.innerHTML = menuContent3; // Устанавливаем содержимое меню
-        dropdownMenu.classList.add('show'); // Показываем меню
-    });
-
-    // Закрытие меню при клике вне его области
-    window.addEventListener('click', function(event) {
-        if (
-            !event.target.matches('#user-button-1') &&
-            !event.target.matches('#user-button-2') &&
-            !event.target.matches('#user-button-3') &&
-            !dropdownMenu.contains(event.target)
-        ) {
-            dropdownMenu.classList.remove('show'); // Скрываем меню
-        }
-    });
-</script>
+<!-- Подключение JavaScript-файла -->
+<script src="/js/script.js"></script>
 </body>
 </html>
