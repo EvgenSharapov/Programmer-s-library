@@ -19,8 +19,15 @@ public class QuestionController {
         this.questionService = questionService;
     }
 
+    // Метод для создания вопроса
     @PostMapping
     public Question createQuestion(@RequestBody QuestionRequest request) {
         return questionService.saveQuestion(request.getText(), request.getOptions(), request.getCorrectAnswerIndex());
+    }
+
+    // Метод для получения всех вопросов
+    @GetMapping
+    public List<Question> getAllQuestions() {
+        return questionService.getAllQuestions();
     }
 }
