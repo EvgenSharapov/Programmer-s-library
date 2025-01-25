@@ -119,6 +119,7 @@ document.getElementById('test-form').addEventListener('submit', function(event) 
     const option3 = document.getElementById('option3').value;
     const option4 = document.getElementById('option4').value;
     const correctAnswer = document.querySelector('input[name="correct-answer"]:checked').value;
+    console.log("Данные формы:", { question, option1, option2, option3, option4, correctAnswer });
 
     // Создаем объект с данными
     const data = {
