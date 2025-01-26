@@ -14,24 +14,24 @@ import org.springframework.security.web.SecurityFilterChain;
     @EnableWebSecurity
     public class SecurityConfig {
 
-        @Bean
-        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-            http
-                    .authorizeHttpRequests((requests) -> requests
-                            .requestMatchers("/", "/login","/index","/api/questions").permitAll() // Разрешаем доступ без авторизации
-                            .anyRequest().authenticated() // Все остальные запросы требуют авторизации
-                    )
-                    .formLogin((form) -> form
-                            .loginPage("/login") // Страница входа
-                            .permitAll() // Разрешаем доступ к странице входа всем
-                    )
-                    .logout((logout) -> logout
-                            .logoutSuccessUrl("/logout-success") // Перенаправление после выхода
-                            .permitAll() // Разрешаем выход всем
-                    );
-
-            return http.build();
-        }
+//        @Bean
+//        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//            http
+//                    .authorizeHttpRequests((requests) -> requests
+//                            .requestMatchers("/", "/login","/index","/api/questions").permitAll() // Разрешаем доступ без авторизации
+//                            .anyRequest().authenticated() // Все остальные запросы требуют авторизации
+//                    )
+//                    .formLogin((form) -> form
+//                            .loginPage("/login") // Страница входа
+//                            .permitAll() // Разрешаем доступ к странице входа всем
+//                    )
+//                    .logout((logout) -> logout
+//                            .logoutSuccessUrl("/logout-success") // Перенаправление после выхода
+//                            .permitAll() // Разрешаем выход всем
+//                    );
+//
+//            return http.build();
+//        }
 
         @Bean
         public UserDetailsService userDetailsService() {
@@ -43,6 +43,17 @@ import org.springframework.security.web.SecurityFilterChain;
                     .build();
 
             return new InMemoryUserDetailsManager(user);
+        }
+
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+            http
+                    .csrf(csrf -> csrf.disable()) // Отключаем CSRF
+                    .authorizeHttpRequests(auth -> auth
+                            .requestMatchers("/api/questions").permitAll() // Разрешаем доступ к эндпоинту
+                            .anyRequest().authenticated()
+                    );
+            return http.build();
         }
 
 }
