@@ -16,7 +16,7 @@ public class Question implements Serializable {
 
     private String text; // Текст вопроса
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
 
     private List<String> options; // Варианты ответов
 
