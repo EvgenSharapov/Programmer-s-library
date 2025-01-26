@@ -14,17 +14,21 @@
 <!-- Основное содержимое -->
 <main id="main-content">
     <h2>Вопрос <span th:text="${questionNumber}"></span>из <span th:text=" ${totalQuestions}"></span></h2>
-    <h2>Правильных <span th:text=" ${correctAnswers}"></span>из <span th:text=" ${questionNumber}"></span></h2>
+    <h2>Правильных <span th:text=" ${percentage}"></span>%</h2>
+
     <form th:action="@{/test}" method="post">
         <div class="question">
             <p th:text="${question.text}"></p>
             <div class="answer-buttons">
-                <div th:each="option : ${question.options}">
-                    <button class="animated-button" type="submit" name="answer" th:value="${option}" th:text="${option}"></button>
+                <!-- Используем th:each с индексом -->
+                <div th:each="option, iterStat : ${question.options}">
+                    <button class="animated-button" type="submit" name="answerNumber" th:value="${iterStat.index}" th:text="${option}"></button>
                 </div>
             </div>
         </div>
     </form>
+
+
 </main>
 
 
