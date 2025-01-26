@@ -51,10 +51,7 @@ public class TestController {
         public String showTest(HttpSession session, Model model) {
 
 //            List<Question> questions = (List<Question>) session.getAttribute("questions");
-//            for (Question question:questions){
-//                List<String> options = question.getOptions();
 //
-//            }
 //
 //            if (questions == null) {
 //                // Если список вопросов еще не перемешан, получаем все вопросы и перемешиваем их
@@ -62,6 +59,13 @@ public class TestController {
 //                Collections.shuffle(questions);
 //
 //                session.setAttribute("questions", questions);
+//            }
+//            questions= (List<Question>) session.getAttribute("questions");
+//
+//            for (Question question:questions){
+//                List<String> options = question.getOptions();
+//                System.out.println(options);
+//
 //            }
 
 
