@@ -127,6 +127,7 @@ document.getElementById('test-form').addEventListener('submit', function(event) 
         options: [option1, option2, option3, option4],
         correctAnswerIndex: parseInt(correctAnswer) - 1 // Преобразуем в индекс (0-based)
     };
+    console.log(data)
 
     // Отправляем данные на сервер
     fetch('/api/questions', {
