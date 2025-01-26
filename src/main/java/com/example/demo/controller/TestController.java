@@ -1,4 +1,5 @@
 package com.example.demo.controller;
+import com.example.demo.dto.QuestionRequest;
 import com.example.demo.entity.Question;
 import com.example.demo.service.QuestionService;
 import jakarta.servlet.http.HttpSession;
@@ -13,9 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -43,26 +46,31 @@ public class TestController {
         }
 
 
-
+        @Transactional
         @GetMapping("/test")
         public String showTest(HttpSession session, Model model) {
 
-            List<Question> questions = (List<Question>) session.getAttribute("questions");
+//            List<Question> questions = (List<Question>) session.getAttribute("questions");
+//            for (Question question:questions){
+//                List<String> options = question.getOptions();
+//
+//            }
+//
+//            if (questions == null) {
+//                // Если список вопросов еще не перемешан, получаем все вопросы и перемешиваем их
+//                questions = questionService.getAllQuestions();
+//                Collections.shuffle(questions);
+//
+//                session.setAttribute("questions", questions);
+//            }
 
-            if (questions == null) {
-                // Если список вопросов еще не перемешан, получаем все вопросы и перемешиваем их
-                questions = questionService.getAllQuestions();
-                Collections.shuffle(questions);
-                session.setAttribute("questions", questions);
-            }
-
-            for (Question question : questions) {
-                Hibernate.initialize(question.getOptions());
-            }
 
 
-//            List<Question> questions = questionService.getAllQuestions();
-//            Collections.shuffle(questions);
+
+
+
+            List<Question> questions = questionService.getAllQuestions();
+            Collections.shuffle(questions);
 
 
             Integer percentage = (Integer) session.getAttribute("percentage");
@@ -147,7 +155,7 @@ public class TestController {
 
             // Вычисление процента правильных ответов
             double percentage = (double) correctAnswers / totalQuestions * 100;
-            System.out.println(percentage);
+            System.out.println("Правильных ответов: "+percentage);
             model.addAttribute("correctAnswers", correctAnswers);
             model.addAttribute("totalQuestions", totalQuestions);
             model.addAttribute("percentage", percentage);

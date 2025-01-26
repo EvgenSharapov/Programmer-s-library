@@ -33,10 +33,13 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
+
+
     // Метод для получения всех вопросов
     public List<Question> getAllQuestions() {
         return questionRepository.findAll();
 
     }
+
 
 }

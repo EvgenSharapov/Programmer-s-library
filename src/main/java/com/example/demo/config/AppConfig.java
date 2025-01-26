@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.support.OpenSessionInViewFilter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
@@ -16,6 +17,7 @@ import javax.sql.DataSource;
 @PropertySource("classpath:application.properties")
 @EnableTransactionManagement
 public class AppConfig {
+
 
     @Value("${db.driver}")
     private String dbDriver;

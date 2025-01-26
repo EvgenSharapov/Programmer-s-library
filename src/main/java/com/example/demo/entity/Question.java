@@ -3,11 +3,12 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import org.springframework.context.annotation.Bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 
-public class Question {
+public class Question implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +25,6 @@ public class Question {
 
 
 
-    private String currect;
-
     // Конструкторы
     public Question() {
     }
@@ -36,13 +35,9 @@ public class Question {
         this.correctAnswerIndex = correctAnswerIndex;
     }
 
-    public String getCurrect() {
-        return currect;
-    }
 
-    public void setCurrect(String currect) {
-        this.currect = currect;
-    }
+
+
 
     // Геттеры и сеттеры
     public Long getId() {

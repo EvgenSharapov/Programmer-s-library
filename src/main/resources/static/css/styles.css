@@ -86,7 +86,7 @@ body {
 
 .auth-message {
     margin-top: 10px;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     color: #333;
     text-align: center;
 }
@@ -150,29 +150,28 @@ main {
 }
 
 .animated-button {
-    background-color: #4CAF50;
+    background-color: #aeddaf;
     border: none;
-    color: white;
+    color: #1d0808;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 18px;
     cursor: pointer;
     border-radius: 12px;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    width: 100%;
-    max-width: 200px;
+    width: 600px;
     box-sizing: border-box;
 }
 
 .animated-button:hover {
-    background-color: #45a049;
+    background-color: #b5d4b5;
     transform: scale(1.02);
 }
 
 .animated-button:active {
-    background-color: #3e8e41;
+    background-color: #cce0cd;
     transform: scale(0.98);
 }
 
