@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -35,6 +36,7 @@ public class QuestionService {
     // Метод для получения всех вопросов
     public List<Question> getAllQuestions() {
         return questionRepository.findAll();
+
     }
 
 }

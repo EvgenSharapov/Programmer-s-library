@@ -16,9 +16,15 @@ public class Question {
     private String text; // Текст вопроса
 
     @ElementCollection
+
     private List<String> options; // Варианты ответов
 
-    private int correctAnswerIndex; // Индекс правильного ответа
+    private int correctAnswerIndex;// Индекс правильного ответа
+
+
+
+
+    private String currect;
 
     // Конструкторы
     public Question() {
@@ -28,6 +34,14 @@ public class Question {
         this.text = text;
         this.options = options;
         this.correctAnswerIndex = correctAnswerIndex;
+    }
+
+    public String getCurrect() {
+        return currect;
+    }
+
+    public void setCurrect(String currect) {
+        this.currect = currect;
     }
 
     // Геттеры и сеттеры

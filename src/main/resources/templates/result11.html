@@ -2,17 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Результаты теста</title>
+    <title>Результат</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-<div class="results-container">
-    <h2>Результаты теста</h2>
-    <p>Процент правильных ответов: <span th:text="${percentage}"></span>%</p>
+<!-- Шапка сайта -->
+<header class="site-header">
+    <h1 class="welcome-text">Тест завершён!</h1>
+</header>
+
+<!-- Сообщение о завершении теста -->
+<main class="result-content">
+    <p>Спасибо за прохождение теста.</p>
     <div class="button-container">
         <a href="/reset" class="animated-button">Начать заново</a>
         <a href="/index" class="animated-button">Вернуться в меню</a>
     </div>
-</div>
+</main>
 </body>
 </html>
