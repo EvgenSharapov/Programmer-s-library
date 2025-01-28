@@ -32,7 +32,7 @@ import org.springframework.security.web.SecurityFilterChain;
 //
 //            return http.build();
 //        }
-
+//
         @Bean
         public UserDetailsService userDetailsService() {
             // Создаем тестового пользователя (логин: user, пароль: password)
@@ -50,9 +50,18 @@ import org.springframework.security.web.SecurityFilterChain;
             http
                     .csrf(csrf -> csrf.disable()) // Отключаем CSRF
                     .authorizeHttpRequests(auth -> auth
-                            .requestMatchers("/api/questions").permitAll() // Разрешаем доступ к эндпоинту
+                            .requestMatchers("/", "/login","/index","/api/questions").permitAll() // Разрешаем доступ к эндпоинту
                             .anyRequest().authenticated()
+                    )
+                    .formLogin((form) -> form
+                            .loginPage("/login") // Страница входа
+                            .permitAll() // Разрешаем доступ к странице входа всем
+                    )
+                    .logout((logout) -> logout
+                            .logoutSuccessUrl("/logout-success") // Перенаправление после выхода
+                            .permitAll() // Разрешаем выход всем
                     );
+
             return http.build();
         }
 
