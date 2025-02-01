@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #dedee9;
+
 }
 
 header {
@@ -185,4 +186,67 @@ code {
     color: #d63384; /* Цвет текста кода */
     background-color: transparent; /* Прозрачный фон */
     padding: 0; /* Убираем внутренние отступы */
+}
+
+/* Стили для кнопок областей */
+.area-button {
+    width: 200px; /* Ширина кнопки */
+    height: 100px; /* Высота кнопки */
+    background-color: #444444; /* Цвет фона */
+    color: #fff; /* Цвет текста */
+    border: none; /* Убираем рамку */
+    border-radius: 10px; /* Закругленные углы */
+    font-size: 18px; /* Размер шрифта */
+    font-weight: bold; /* Жирный шрифт */
+    cursor: pointer; /* Курсор-указатель */
+    transition: background-color 0.3s, transform 0.3s; /* Плавные переходы */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень */
+}
+
+/* Анимация при наведении */
+.area-button:hover {
+    background-color: #333333; /* Темнее при наведении */
+    transform: scale(1.05); /* Легкое увеличение */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Увеличиваем тень */
+}
+
+/* Анимация при нажатии */
+.area-button:active {
+    transform: scale(0.95); /* Легкое уменьшение */
+}
+
+
+
+/* Контейнер для списка тем */
+.topics-list-container {
+    margin-left: 60%;
+    width: 35%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для элемента темы */
+.topic-item {
+    margin: 10px 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.topic-item:hover {
+    background-color: #f1f1f1;
+}
+
+/* Стили для содержимого темы */
+.topic-content-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
