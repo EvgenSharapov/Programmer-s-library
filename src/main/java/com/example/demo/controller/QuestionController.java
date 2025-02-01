@@ -5,7 +5,6 @@ import com.example.demo.entity.Question;
 import com.example.demo.repository.QuestionRepository;
 import com.example.demo.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

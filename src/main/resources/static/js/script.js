@@ -11,7 +11,7 @@ const addTestForm = document.getElementById('add-test-form');
 // Содержимое меню для первой кнопки
 const menuContent1 = `
     <a href="/test">Пройти тест</a>
-    <a href="#">Библиотека</a>
+    <a href="#" id="show-library-button">Библиотека</a>
 `;
 
 // Содержимое меню для второй кнопки
@@ -65,6 +65,7 @@ document.addEventListener('click', function(event) {
         event.preventDefault(); // Предотвращаем стандартное поведение ссылки
         addTestForm.style.display = 'block'; // Показываем форму
         dropdownMenu.classList.remove('show'); // Скрываем меню
+        clearContainers(); // Очищаем старые контейнеры
     }
 });
 
@@ -127,7 +128,7 @@ document.getElementById('test-form').addEventListener('submit', function(event) 
         options: [option1, option2, option3, option4],
         correctAnswerIndex: parseInt(correctAnswer) - 1 // Преобразуем в индекс (0-based)
     };
-    console.log(data)
+    console.log(data);
 
     // Отправляем данные на сервер
     fetch('/api/questions', {
@@ -148,11 +149,16 @@ document.getElementById('test-form').addEventListener('submit', function(event) 
         });
 });
 
-
 // Обработчик для кнопки "Вывести все тесты"
 document.addEventListener('click', function(event) {
     if (event.target.id === 'show-tests-button') {
         event.preventDefault(); // Предотвращаем стандартное поведение ссылки
+
+        // Очищаем старые контейнеры
+        clearContainers();
+
+        // Скрываем форму добавления теста
+        hideAddTestForm();
 
         // Отправляем запрос на сервер для получения всех вопросов
         fetch('/api/questions')
@@ -164,6 +170,32 @@ document.addEventListener('click', function(event) {
             .catch(error => {
                 console.error('Ошибка:', error);
                 alert('Произошла ошибка при загрузке вопросов.');
+            });
+    }
+});
+
+// Обработчик для кнопки "Библиотека"
+document.addEventListener('click', function(event) {
+    if (event.target.id === 'show-library-button') {
+        event.preventDefault(); // Предотвращаем стандартное поведение ссылки
+
+        // Очищаем старые контейнеры
+        clearContainers();
+
+        // Скрываем форму добавления теста
+        hideAddTestForm();
+
+        // Отправляем запрос на сервер для получения всех заголовков тем
+        fetch('/api/topics/titles')
+            .then(response => response.json())
+            .then(titles => {
+                // Отображаем заголовки на странице
+                displayTopics(titles);
+                console.log("Нажали:", titles);
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                alert('Произошла ошибка при загрузке заголовков тем.');
             });
     }
 });
@@ -188,12 +220,48 @@ function displayQuestions(questions) {
         container.appendChild(questionDiv);
     });
 
-    // Удаляем старый контейнер, если он есть
-    const oldContainer = document.getElementById('questions-container');
-    if (oldContainer) {
-        oldContainer.remove();
-    }
+    // Добавляем новый контейнер на страницу
+    document.body.appendChild(container);
+}
+
+// Функция для отображения заголовков тем
+function displayTopics(titles) {
+    const container = document.createElement('div');
+    container.id = 'topics-container';
+    container.innerHTML = '<h2>Заголовки тем:</h2>';
+
+    // Создаем список заголовков
+    const topicsList = document.createElement('ul');
+    topicsList.id = 'topics-list';
+
+    titles.forEach((title, index) => {
+        const topicItem = document.createElement('li');
+        topicItem.innerHTML = `<strong>Тема ${index + 1}:</strong> ${title}`;
+        topicsList.appendChild(topicItem);
+    });
+
+    container.appendChild(topicsList);
 
     // Добавляем новый контейнер на страницу
     document.body.appendChild(container);
+}
+
+// Функция для очистки старых контейнеров
+function clearContainers() {
+    const containers = [
+        'questions-container',
+        'topics-container'
+    ];
+
+    containers.forEach(id => {
+        const container = document.getElementById(id);
+        if (container) {
+            container.remove();
+        }
+    });
+}
+
+// Функция для скрытия формы добавления теста
+function hideAddTestForm() {
+    addTestForm.style.display = 'none';
 }
