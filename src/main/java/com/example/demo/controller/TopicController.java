@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 import com.example.demo.dto.TopicRequest;
 import com.example.demo.entity.Topic;
+import com.example.demo.entity.TopicArea;
 import com.example.demo.repository.TopicRepository;
 import com.example.demo.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,4 +53,12 @@ public class TopicController {
     public List<String> getAllTopicTitles() {
         return topicService.getAllTopicTitles();
     }
+
+    @GetMapping("/by-area/{topicArea}")
+    public List<Topic> getTopicsByArea(@PathVariable TopicArea topicArea) {
+        return topicService.getTopicsByArea(topicArea);
+    }
+
+
+
 }

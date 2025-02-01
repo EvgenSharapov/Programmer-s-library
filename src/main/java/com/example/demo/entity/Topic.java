@@ -1,35 +1,35 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-
+import java.util.List;
 
 @Entity
-@Table(name="topic")
-public class Topic{
-
+@Table(name = "topic")
+public class Topic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="table")
+    @Column(name = "table")
     private String tableOfContents;
 
-
     @Lob
-    @Column(name="content")
+    @Column(name = "content")
     private String content;
 
-
-
-
-    public Topic(String tableOfContents, String content) {
-        this.tableOfContents = tableOfContents;
-        this.content = content;
-    }
+    @Enumerated(EnumType.ORDINAL) // Сохраняем Enum как строку в базе данных
+    @Column(name = "topic_area")
+    private TopicArea topicArea;
 
 
     public Topic() {
+    }
+
+    public Topic(String tableOfContents, String content ,TopicArea topicArea) {
+        this.tableOfContents = tableOfContents;
+        this.content = content;
+        this.topicArea = topicArea;
     }
 
     public Long getId() {
@@ -56,4 +56,11 @@ public class Topic{
         this.content = content;
     }
 
+    public TopicArea getTopicArea() {
+        return topicArea;
+    }
+
+    public void setTopicArea(TopicArea topicArea) {
+        this.topicArea = topicArea;
+    }
 }

@@ -1,15 +1,15 @@
 package com.example.demo.service;
 import com.example.demo.dto.TopicRequest;
 import com.example.demo.entity.Topic;
+import com.example.demo.entity.TopicArea;
 import com.example.demo.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 @Service
 public class TopicService {
@@ -24,12 +24,12 @@ public class TopicService {
     @PostMapping
     public Topic createTopic(@RequestBody TopicRequest request) {
         System.out.println("Получен запрос: " + request); // Логируем запрос
-        return saveTopic(request.getTableOfContents(), request.getContent());
+        return saveTopic(request.getTableOfContents(), request.getContent(),request.getTopicArea());
     }
 
     // Метод для сохранения вопроса
-    public Topic saveTopic(String table, String content) {
-        Topic topic = new Topic(table, content);
+    public Topic saveTopic(String table, String content,TopicArea topicArea) {
+        Topic topic = new Topic(table, content,topicArea);
         return topicRepository.save(topic);
     }
 
@@ -43,6 +43,9 @@ public class TopicService {
         return topicRepository.findById(id);
     }
 
+    public List<Topic> getTopicsByArea(TopicArea topicArea) {
+        return topicRepository.findByTopicArea(topicArea);
+    }
     public List<String> getAllTopicTitles() {
        return topicRepository.findAll().stream()
                 .map(Topic::getTableOfContents) // Предполагаем, что заголовок хранится в поле tableOfContents
