@@ -4,20 +4,17 @@ userButton2.innerHTML = '<i class="fas fa-user"></i>'; // Иконка поль�
 
 const TopicArea = {
     OOP: 'OOP',
-    EXCEPTIONS: 'EXCEPTIONS',
+    JAVA_CORE: 'JAVA_CORE',
     GIT: 'GIT',
     SPRING: 'SPRING',
-    OBJECT: 'OBJECT',
-    PATTERNS: 'PATTERNS',
-    SOLID: 'SOLID',
-    SQL: 'SQL',
+    DATA_BASE: 'DATA_BASE',
+    MULTITHREADING: 'MULTITHREADING',
+    OTHER: 'OTHER',
     COLLECTIONS: 'COLLECTIONS',
+    TEST : 'TEST'
 
 
 };
-
-
-
 
 // Общий контейнер для меню
 const dropdownMenu = document.getElementById('dropdown-menu');
@@ -218,16 +215,13 @@ function displayQuestions(questions) {
 }
 
 
-
-
-
 // Обработчик для кнопки "Библиотека"
 document.addEventListener('click', function(event) {
     if (event.target.id === 'show-library-button') {
         event.preventDefault(); // Предотвращаем стандартное поведение ссылки
 
         // Очищаем старые контейнеры
-        clearContainers();
+        clearContainersLibrary();
 
         // Скрываем форму добавления теста
         hideAddTestForm();
@@ -268,11 +262,6 @@ function loadAllTopics() {
 }
 
 
-
-
-
-
-
 // Функция для создания выпадающих кнопок по областям
 function createAreaButtons() {
     const container = document.createElement('div');
@@ -299,8 +288,6 @@ function createAreaButtons() {
     document.body.appendChild(container);
 }
 
-
-
 // Функция для загрузки тем по области
 function loadTopicsByArea(area) {
     clearContainers()
@@ -316,64 +303,17 @@ function loadTopicsByArea(area) {
 }
 
 
-
-
-// // Функция для отображения списка тем
-// function displayTopics(topics) {
-//     const container = document.getElementById('topics-list-container');
-//     container.innerHTML = '<h2>Список тем:</h2>';
-//
-//     if (topics.length > 0) {
-//         // Загружаем первую тему
-//         loadTopicContent(topics[0].id);
-//
-//         // Выделяем первую тему, если она существует
-//         const firstTopic = container.querySelector('.topic-item');
-//         if (firstTopic) {
-//             setActiveTopic(firstTopic);
-//         }
-//     }
-//
-//     topics.forEach(topic => {
-//         const topicDiv = document.createElement('div');
-//         topicDiv.className = 'topic-item';
-//         topicDiv.innerHTML = `
-//             <p class="topic-title" data-topic-id="${topic.id}">
-//                 <strong>${topic.tableOfContents}</strong>
-//             </p>
-//         `;
-//         topicDiv.addEventListener('click', () => {
-//             loadTopicContent(topic.id);
-//             setActiveTopic(topicDiv);
-//         });
-//         container.appendChild(topicDiv);
-//     });
-// }
-//
-// // Функция для выделения активной темы
-// function setActiveTopic(activeTopic) {
-//     const topics = document.querySelectorAll('.topic-item');
-//     topics.forEach(topic => topic.classList.remove('active')); // Убираем выделение у всех тем
-//
-//     if (activeTopic) {
-//         activeTopic.classList.add('active'); // Выделяем активную тему
-//     }
-// }
-
-
-
-
-
-
-
-
 // Функция для отображения тем
 function displayTopics(topics) {
     const container = document.createElement('div');
-
     container.id = 'topics-list-container';
-    container.className='topics-list-container';
+    container.className = 'topics-list-container';
     container.innerHTML = '';
+
+    if (topics.length === 0) {
+        container.innerHTML = '<p>Темы не найдены.</p>';
+        return;
+    }
 
     topics.forEach(topic => {
         const topicDiv = document.createElement('div');
@@ -381,19 +321,35 @@ function displayTopics(topics) {
         topicDiv.innerHTML = `
             <p class="topic-title" data-topic-id="${topic.id}">${topic.tableOfContents}</p>
         `;
-        topicDiv.querySelector('.topic-title').addEventListener('click', () => loadTopicContent(topic.id)); // Обработчик клика
+        topicDiv.querySelector('.topic-title').addEventListener('click', () => {
+            loadTopicContent(topic.id); // Загружаем содержимое темы
+            setActiveTopic(topicDiv); // Выделяем активную тему
+        });
         container.appendChild(topicDiv);
     });
 
     // Очищаем старые контейнеры и добавляем новый
     clearContainers();
     document.body.appendChild(container);
+
+    // Выделяем первую тему после добавления контейнера в DOM
+    if (topics.length > 0) {
+        const firstTopic = container.querySelector('.topic-item'); // Теперь контейнер в DOM
+        if (firstTopic) {
+            setActiveTopic(firstTopic); // Выделяем первую тему
+        }
+    }
 }
 
+// Функция для выделения активной темы
+function setActiveTopic(activeTopic) {
+    const topics = document.querySelectorAll('.topic-item');
+    topics.forEach(topic => topic.classList.remove('active')); // Убираем выделение у всех тем
 
-
-
-
+    if (activeTopic) {
+        activeTopic.classList.add('active'); // Выделяем активную тему
+    }
+}
 
 
 // Функция для загрузки содержимого темы
@@ -408,21 +364,6 @@ function loadTopicContent(topicId) {
             alert('Произошла ошибка при загрузке содержимого темы.');
         });
 }
-
-
-// // Функция для отображения содержимого темы
-// function displayTopicContent(topic) {
-//     const container = document.getElementById('topic-content-container');
-//     container.innerHTML = `
-//         <h2>Содержимое темы:</h2>
-//         <div class="topic-content-container">
-//             <p><strong>Название темы:</strong> ${topic.tableOfContents}</p>
-//             <p>${topic.content}</p>
-//         </div>
-//     `;
-// }
-
-
 
 
 // Функция для отображения содержимого темы
@@ -442,136 +383,6 @@ function displayTopicContent(topic) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// Функция для отображения заголовков тем
-// function displayTopics(titles) {
-//     const container = document.createElement('div');
-//     container.id = 'topics-container';
-//     container.innerHTML = '';
-//
-//     // Создаем контейнер для карточек тем
-//     const topicsGrid = document.createElement('div');
-//     topicsGrid.style.display = 'grid'; // Используем CSS Grid для расположения карточек
-//     topicsGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(200px, 1fr))'; // Адаптивные колонки
-//     topicsGrid.style.gap = '20px'; // Отступы между карточками
-//     topicsGrid.style.padding = '20px'; // Отступы внутри контейнера
-//
-//     titles.forEach((title, index) => {
-//         // Создаем карточку для темы
-//         const topicCard = document.createElement('div');
-//         topicCard.style.border = '1px solid #ccc'; // Рамка карточки
-//         topicCard.style.borderRadius = '10px'; // Закругленные углы
-//         topicCard.style.padding = '15px'; // Отступы внутри карточки
-//         topicCard.style.display = 'flex'; // Используем flexbox
-//         topicCard.style.flexDirection = 'column'; // Вертикальное расположение элементов
-//         topicCard.style.justifyContent = 'space-between'; // Распределение пространства между элементами
-//         topicCard.style.backgroundColor = '#f9f9f9'; // Фон карточки
-//         topicCard.style.height = '150px'; // Фиксированная высота карточки (можно изменить)
-//
-//         // Название темы
-//         const topicTitle = document.createElement('h3');
-//         topicTitle.textContent = title; // Название темы
-//         topicTitle.style.margin = '0 0 10px 0'; // Отступ снизу
-//         topicTitle.style.fontSize = '18px'; // Размер шрифта
-//
-//         // Большая кнопка
-//         const topicButton = document.createElement('button');
-//         topicButton.textContent = 'Перейти к теме'; // Текст кнопки
-//         topicButton.style.width = '100%'; // Ширина кнопки
-//         topicButton.style.padding = '10px'; // Отступы внутри кнопки
-//         topicButton.style.fontSize = '16px'; // Размер шрифта
-//         topicButton.style.backgroundColor = '#007bff'; // Цвет фона кнопки
-//         topicButton.style.color = '#fff'; // Цвет текста кнопки
-//         topicButton.style.border = 'none'; // Убираем рамку
-//         topicButton.style.borderRadius = '5px'; // Закругленные углы
-//         topicButton.style.cursor = 'pointer'; // Курсор-указатель
-//         topicButton.addEventListener('click', () => loadTopicContent(index + 1)); // Обработчик клика
-//
-//         // Добавляем название и кнопку в карточку
-//         topicCard.appendChild(topicTitle);
-//         topicCard.appendChild(topicButton);
-//
-//         // Добавляем карточку в контейнер
-//         topicsGrid.appendChild(topicCard);
-//     });
-//
-//     container.appendChild(topicsGrid);
-//
-//     // Добавляем новый контейнер на страницу
-//     document.body.appendChild(container);
-// }
-// // Функция для загрузки содержимого темы
-// function loadTopicContent(topicId) {
-//     // Очищаем старые контейнеры
-//     clearContainers();
-//
-//     // Отправляем запрос на сервер для получения содержимого темы
-//     fetch(`/api/topics/${topicId}`)
-//         .then(response => response.json())
-//         .then(topicContent => {
-//             // Отображаем содержимое темы на странице
-//             displayTopicContent(topicContent);
-//         })
-//         .catch(error => {
-//             console.error('Ошибка:', error);
-//             alert('Произошла ошибка при загрузке содержимого темы.');
-//         });
-// }
-//
-// // Функция для отображения содержимого темы
-// function displayTopicContent(topicContent) {
-//     const container = document.createElement('div');
-//     container.id = 'topic-content-container';
-//     container.className = 'topic-content-container'; // Добавляем класс для стилизации
-//     container.innerHTML = '';
-//
-//     // Отображаем содержимое темы
-//     const contentDiv = document.createElement('div');
-//     contentDiv.innerHTML = `
-//         <p> ${topicContent.content}</p>
-//     `;
-//     container.appendChild(contentDiv);
-//
-//     // Добавляем новый контейнер на страницу
-//     document.body.appendChild(container);
-// }
-
 // Функция для очистки старых контейнеров
 function clearContainers() {
     const containers = [
@@ -589,6 +400,25 @@ function clearContainers() {
         }
     });
 }
+// Функция для очистки старых контейнеров
+function clearContainersLibrary() {
+    const containers = [
+        'questions-container',
+        'topics-container',
+        'topic-content-container',
+        'areas-container',
+        'topics-list-container'
+
+    ];
+
+    containers.forEach(id => {
+        const container = document.getElementById(id);
+        if (container) {
+            container.remove();
+        }
+    });
+}
+
 
 // Функция для скрытия формы добавления теста
 function hideAddTestForm() {

@@ -1,0 +1,52 @@
+-- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
+--
+-- Host: localhost    Database: questions
+-- ------------------------------------------------------
+-- Server version	8.0.40
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `question_options`
+--
+
+DROP TABLE IF EXISTS `question_options`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `question_options` (
+  `question_id` bigint NOT NULL,
+  `options` varchar(255) DEFAULT NULL,
+  KEY `FKjk4v42xhyfv4ca1yyhorsg5tv` (`question_id`),
+  CONSTRAINT `FKjk4v42xhyfv4ca1yyhorsg5tv` FOREIGN KEY (`question_id`) REFERENCES `question` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `question_options`
+--
+
+LOCK TABLES `question_options` WRITE;
+/*!40000 ALTER TABLE `question_options` DISABLE KEYS */;
+INSERT INTO `question_options` VALUES (1,'A) Java Development Kit'),(1,'B) Java Data Kit'),(1,'C) Java Document Kit'),(1,'D) Java Database Kit'),(2,'A) array.length()'),(2,'B) length(array)  '),(2,'C) array.length'),(2,'D) array.size()'),(3,'A) =='),(3,'B) ='),(3,'C) equals()'),(3,'D) compareTo()'),(4,'A) public'),(4,'B) protected'),(4,'C) private'),(4,'D) default'),(5,'A) Это класс, который не может быть расширен'),(5,'B) Это абстрактный класс'),(5,'C) Это набор абстрактных методов, который может реализовываться различными классами'),(5,'D) Это конкретный класс'),(6,'A) int'),(6,'B) boolean'),(6,'C) String'),(6,'D) char'),(7,'A) try-catch'),(7,'B) throw-catch'),(7,'C) except'),(7,'D) handle'),(8,'A) initialize()'),(8,'B) start()'),(8,'C) constructor()'),(8,'D) <имя класса> (например, MyClass())'),(9,'A) Программа завершится без ошибок'),(9,'B) Исключение будет проигнорировано'),(9,'C) Программа продолжит выполняться'),(9,'D) Программа будет завершена с ошибкой'),(10,'A) Процесс компиляции кода'),(10,'B) Процесс удаления неиспользуемых объектов из памяти'),(10,'C) Процесс обработки исключений'),(10,'D) Процесс оптимизации производительности'),(11,'A) List'),(11,'B) Map'),(11,'C) Set'),(11,'D) Queue'),(12,'A) Integer'),(12,'B) Double'),(12,'C) Character'),(12,'D) String'),(13,'A) private'),(13,'B) public'),(13,'C) protected'),(13,'D) default'),(14,'A) Вернется 123'),(14,'B) Вернется 0'),(14,'C) Возникнет исключение NumberFormatException'),(14,'D) Вернется 123abc'),(15,'A) clone()'),(15,'B) copy()'),(15,'C) duplicate()'),(15,'D) rast()'),(16,'A) Serializable'),(16,'B) Runnable'),(16,'C) Stream'),(16,'D) Cloneable'),(17,'A) Класс не может быть изменен'),(17,'B) Класс не может наследоваться'),(17,'C) Класс может иметь только один экземпляр'),(17,'D) Класс не может иметь абстрактные методы'),(18,'A) new ClassName() { }'),(18,'B) ClassName() { }'),(18,'C) new ClassName: { }'),(18,'D) ClassName: { }'),(19,'A) метод в интерфейсе'),(19,'B) метод в абстрактном классе'),(19,'C) метод с ключевым словом static'),(19,'D) метод, который наследуется от родительского класса'),(20,'A) boolean equals(Object obj)'),(20,'B) int equals(Object obj)'),(20,'C) void equals(Object obj)'),(20,'D) String equals(Object obj)'),(21,'A) Произойдет компиляция без ошибок'),(21,'B) Возникнет ошибка выполнения'),(21,'C) Возникнет ошибка компиляции'),(21,'D) Будет выбран конструктор по умолчанию в родительском классе  '),(22,'A) ArrayList'),(22,'B) HashMap'),(22,'C) Date'),(22,'D) Optional'),(23,'A) Можно обратиться напрямую'),(23,'B) Необходимо создать экземпляр класса'),(23,'C) Используется ключевое слово static'),(23,'D) Никак, доступ невозможен'),(24,'A) add(int index, E element)'),(24,'B) insert(int index, E element)'),(24,'C) put(int index, E element)'),(24,'D) add(E element)'),(25,'A) Hello'),(25,'B) null'),(25,'C) Hellonull'),(25,'D) Ошибка компиляции'),(26,'A) ClassLoader'),(26,'B) Class'),(26,'C) Field'),(26,'D) Все вышеперечисленные'),(27,'A) Удаляет первый элемент из списка'),(27,'B) Удаляет все элементы из списка'),(27,'C) Очищает список, но не освобождает память'),(27,'D) Удаляет элементы, но оставляет их в памяти'),(28,'A) synchronized'),(28,'B) lock'),(28,'C) critical'),(28,'D) private'),(29,'A) throws IOException, SQLException'),(29,'B) catch IOException, SQLException'),(29,'C) throw IOException, SQLException'),(29,'D) raise IOException, SQLException'),(30,'A) Java является языком программирования с поддержкой объектно-ориентированного программирования.'),(30,'B) Java компилируется в байт-код, который выполняется на виртуальной машине Java (JVM).'),(30,'C) Java поддерживает множественное наследование через класс.'),(30,'D) Все объекты в Java являются экземплярами классов.'),(31,'A) String.equals()'),(31,'B) String.compare()  '),(31,'C) String.compareToIgnoreCase()'),(31,'D) String.equalsIgnoreCase()'),(32,'A) Возникнет исключение NoSuchElementException'),(32,'B) Возникнет исключение InputMismatchException'),(32,'C) Программа зависнет'),(32,'D) Возвратит пустую строку'),(33,'A) boolean add(E e)'),(33,'B) boolean remove(Object o)'),(33,'C) void sort()'),(33,'D) boolean isEmpty()'),(34,'A) Проверяемое исключение'),(34,'B) Непроверяемое исключение'),(34,'C) Ошибка'),(34,'D) Исключение времени выполнения'),(35,'A) InputStreamReader'),(35,'B) FileReader'),(35,'C) BufferedReader'),(35,'D) Все вышеперечисленные'),(36,'A) Определяет, является ли объект экземпляром данного класса или интерфейса.'),(36,'B) Проверяет тип переменной перед её использованием.'),(36,'C) Сравнивает два объекта на равенство.'),(36,'D) Создает экземпляр указанного класса.'),(37,'A) Ключевое слово, предотвращающее вывод значения переменной.'),(37,'B) Ключевое слово, обеспечивающее, что изменения переменной будут видимы для всех потоков.'),(37,'C) Ключевое слово, приостанавливающее выполнение потока.'),(37,'D) Ключевое слово, указывающее, что переменная может быть изменена только в одном потоке.'),(38,'A) try-catch'),(38,'B) exception'),(38,'C) handle'),(38,'D) try-except'),(39,'A) Реализовать интерфейс Runnable и переопределить метод run()'),(39,'B) Унаследовать класс Thread и переопределить метод run()'),(39,'C) Использовать класс ExecutorService'),(39,'D) Все вышеперечисленные'),(40,'A) Разделение репозитория на ветки'),(40,'B) Сохранение состояния проекта в репозитории'),(40,'C) Получение изменений из удаленного репозитория'),(40,'D) Переключение между ветками проекта'),(41,'A) git push'),(41,'B) git pull'),(41,'C) git fetch'),(41,'D) git clone'),(42,'A) Объединить изменения из одной ветки в другую'),(42,'B) Перезаписать историю коммитов текущей ветки'),(42,'C) Удалить ветку'),(42,'D) Создать резервную копию репозитория'),(43,'A) Слияние текущей ветки с удаленной веткой'),(43,'B) Слияние текущей ветки с веткой, которая была последней открыта'),(43,'C) Git выдает ошибку, если нет конфликтов'),(43,'D) Git сливает текущую ветку с веткой, на которую вы были переключены последним'),(44,'A) git reset --soft HEAD~1'),(44,'B) git reset --hard HEAD~1'),(44,'C) git checkout HEAD~1'),(44,'D) git revert HEAD'),(45,'A) Хранить метаданные репозитория'),(45,'B) Определять файлы и каталоги, которые должны быть проигнорированы Git'),(45,'C) Описывать процесс сборки проекта'),(45,'D) Содержать информацию о пользователе репозитория'),(46,'A) git branch new-branch'),(46,'B) git checkout new-branch'),(46,'C) git checkout -b new-branch'),(46,'D) git switch new-branch'),(47,'A) Ошибка в команде Git'),(47,'B) Различия между файлами в разных ветках, которые Git не может автоматически слить'),(47,'C) Ветки, которые не были объединены'),(47,'D) Состояние, когда локальный и удаленный репозитории не совпадают'),(48,'A) git amend'),(48,'B) git commit --amend'),(48,'C) git modify'),(48,'D) git edit'),(49,'A) git create'),(49,'B) Использовать веб-интерфейс GitHub'),(49,'C) git remote add'),(49,'D) git push origin master'),(50,'A) Создает резервную копию текущего состояния репозитория  '),(50,' B) Сохраняет изменения в временном хранилище и очищает рабочий каталог'),(50,'C) Переключает ветки'),(50,'D) Объединяет текущую ветку с другой веткой'),(51,'A) --depth'),(51,'B) --shallow'),(51,'C) --history'),(51,'D) --compact'),(52,'A) git tag -a v1.0 -m \"Version 1.0\"'),(52,'B) git commit -m \"Tag v1.0\"'),(52,'C) git branch v1.0'),(52,'D) git version v1.0'),(53,'A) Применяет изменения из одного коммита на текущую ветку'),(53,'B) Удаляет ветку'),(53,'C) Создает новый коммит'),(53,'D) Переключает на предыдущую ветку'),(54,'A) .git/config'),(54,'B) .git/remote'),(54,'C) .git/settings'),(54,'D) .git/remotes'),(55,'A) Удаляет указанный коммит'),(55,'B) Возвращает производимые изменения от указанного коммита в одном новом коммите'),(55,'C) Восстанавливает файлы в состоянии указанного коммита'),(55,'D) Переключает ветку на состояние указанного коммита'),(56,'A) git history'),(56,'B) git log'),(56,'C) git commits'),(56,'D) git show'),(57,'A) Удаляет все коммиты в ветке'),(57,'B) Переключает на указанную ветку, игнорируя изменения'),(57,'C) Ставит индекс и рабочий каталог в состояние последнего коммита'),(57,'D) Удаляет все файлы в рабочем каталоге'),(58,'A) Git автоматом объединит коммиты'),(58,'B) Git выдаст ошибку и запросит выполнить `git pull` для синхронизации'),(58,'C) Git проигнорирует локальные коммиты'),(58,'D) Git создаст новый удаленный репозиторий'),(59,'A) git branch -d branch_name'),(59,'B) git delete branch_name'),(59,'C) git rm branch_name'),(59,'D) git remove branch_name');
+/*!40000 ALTER TABLE `question_options` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2025-02-02 21:32:05

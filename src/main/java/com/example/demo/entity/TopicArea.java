@@ -2,14 +2,14 @@ package com.example.demo.entity;
 
 public enum TopicArea {
     OOP,
-    EXCEPTIONS,
+    JAVA_CORE,
     GIT,
     SPRING,
-    OBJECT,
-    PATTERNS,
-    SOLID,
-    SQL,
-    COLLECTIONS
+    DATA_BASE,
+    MULTITHREADING,
+    OTHER,
+    COLLECTIONS,
+    TEST
 
 
 }
