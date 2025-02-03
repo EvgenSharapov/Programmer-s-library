@@ -163,12 +163,14 @@ header {
 /* Добавьте эти стили в ваш CSS-файл или в <style> в HTML */
 .topic-content-container {
     width: 50%;
-
+    font-family: Verdana, sans-serif;
+    letter-spacing: 1px; /* Расстояние между буквами */
+    line-height: 1.3; /* Высота строки */
     border: 1px solid #ccc; /* Тонкая рамка */
     border-radius: 10px; /* Закругленные края */
-    padding: 40px; /* Отступы внутри контейнера */
+    padding: 50px; /* Отступы внутри контейнера */
     margin: 40px 40px; /* Отступы снаружи контейнера */
-    background-color: #f9f9f9; /* Легкий фон для контраста */
+    background-color: #f8f8f8; /* Легкий фон для контраста */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Легкая тень для объема */
     position: absolute;
     z-index: 1; /* Устанавливаем z-index, чтобы контейнер был поверх */
@@ -229,7 +231,7 @@ code {
     margin-left: 60%;
     width: 35%;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: absolute; /* Абсолютное позиционирование */
@@ -245,7 +247,7 @@ code {
 .topic-item {
     margin: 10px 10px;
     padding: 10px;
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     cursor: pointer;
@@ -315,3 +317,4 @@ code {
     background-color: #6c757d;
     margin-left: 10px;
 }
+

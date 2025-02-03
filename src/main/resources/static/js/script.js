@@ -11,10 +11,26 @@ const TopicArea = {
     MULTITHREADING: 'MULTITHREADING',
     OTHER: 'OTHER',
     COLLECTIONS: 'COLLECTIONS',
-    TEST : 'TEST'
+    TEST : 'TEST',
+    STREAM : 'STREAM'
 
 
 };
+
+
+// Функция для скрытия меню
+function hideDropdownMenu() {
+    dropdownMenu.classList.remove('show');
+}
+
+// Обработчик для клика вне меню
+document.addEventListener('click', function(event) {
+    // Если клик произошел вне меню и не по кнопке, которая открывает меню
+    // if (!dropdownMenu.contains(event.target) &&
+    //     !event.target.matches('#user-button-1, #user-button-2, #user-button-3')) {
+        hideDropdownMenu(); // Скрываем меню
+    // }
+});
 
 // Общий контейнер для меню
 const dropdownMenu = document.getElementById('dropdown-menu');
@@ -358,6 +374,7 @@ function clearContainers() {
             container.remove();
         }
     });
+    hideAddTopicForm();
 }
 // Функция для очистки старых контейнеров
 function clearContainersLibrary() {
@@ -376,6 +393,8 @@ function clearContainersLibrary() {
             container.remove();
         }
     });
+    hideAddTopicForm();
+
 }
 
 
@@ -387,7 +406,10 @@ function hideAddTestForm() {
 // Обработчик для кнопки "Добавить тему"
 document.addEventListener('click', function(event) {
     if (event.target.id === 'add-library-button') {
-        event.preventDefault(); // Предотвращаем стандартное поведение ссылки
+        event.preventDefault();// Предотвращаем стандартное поведение ссылки
+
+        clearContainersLibrary();
+        hideAddTestForm();
 
         // Показываем форму добавления темы
         showAddTopicForm();
@@ -420,24 +442,30 @@ function populateTopicAreas() {
     });
 }
 
+// Функция для очистки формы добавления темы
+function clearAddTopicForm() {
+    document.getElementById('topic-title').value = ''; // Очищаем поле "Заголовок"
+    document.getElementById('topic-content').value = ''; // Очищаем поле "Содержание"
+    document.getElementById('topic-area').selectedIndex = 0; // Сбрасываем выбор области
+}
+
 // Обработчик для формы добавления темы
 document.getElementById('topic-form').addEventListener('submit', function(event) {
     event.preventDefault(); // Предотвращаем стандартную отправку формы
 
     // Собираем данные из формы
-    const title = document.getElementById('topic-title').value;
+    const tableOfContents = document.getElementById('topic-title').value;
     const content = document.getElementById('topic-content').value;
-    const area = document.getElementById('topic-area').value;
-
-
+    const topicArea = document.getElementById('topic-area').value;
 
     // Создаем объект с данными
     const data = {
-        tableOfContents: title,
+        topicArea: topicArea,
         content: content,
-        area: area
+        tableOfContents: tableOfContents
     };
-    console.log(data)
+    console.log(data);
+
     // Отправляем данные на сервер
     fetch('/api/topics', {
         method: 'POST',
@@ -451,7 +479,8 @@ document.getElementById('topic-form').addEventListener('submit', function(event)
             alert('Тема успешно добавлена!');
             console.log(result);
             hideAddTopicForm(); // Скрываем форму после успешного добавления
-            loadAllTopics(); // Обновляем список тем
+            clearAddTopicForm(); // Очищаем поля формы
+            // loadAllTopics(); // Обновляем список тем
         })
         .catch(error => {
             console.error('Ошибка:', error);
@@ -468,4 +497,5 @@ function hideAddTopicForm() {
 // Обработчик для кнопки "Отмена"
 document.getElementById('cancel-topic-button').addEventListener('click', function() {
     hideAddTopicForm(); // Скрываем форму
+    clearAddTopicForm(); // Очищаем поля формы
 });

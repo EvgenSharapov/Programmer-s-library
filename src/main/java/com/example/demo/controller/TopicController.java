@@ -46,9 +46,9 @@ public class TopicController {
 
     @PostMapping
     public Topic createTopic(@RequestBody TopicRequest info) {
-        System.out.println(info.tableOfContents+info.content+info.topicArea);
+        System.out.println(info.tableOfContents+" "+info.content+" "+info.topicArea);
 
-        Topic topic = topicService.createTopic(info.tableOfContents, info.content,TopicArea.OOP);
+        Topic topic = topicService.createTopic(info.tableOfContents, info.content,info.topicArea);
         return topic;
     }
 
