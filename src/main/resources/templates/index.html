@@ -76,7 +76,36 @@
 </div>
 
 
+
+<!-- Форма для добавления темы -->
+<div id="add-topic-form" style="display: none;">
+    <h2>Добавить новую тему</h2>
+    <form id="topic-form">
+        <label for="topic-title">Название темы:</label>
+        <input type="text" id="topic-title" name="topic-title" required>
+
+        <label for="topic-content">Содержимое темы:</label>
+        <textarea id="topic-content" name="topic-content" rows="10" required></textarea>
+
+        <label for="topic-area">Область темы:</label>
+        <select id="topic-area" name="topic-area" required>
+            <!-- Опции будут добавлены динамически -->
+        </select>
+
+        <button type="submit" >Сохранить</button>
+        <button type="button" id="cancel-topic-button">Отмена</button>
+    </form>
+</div>
+
+
+
+
+
+
+
 <!-- Подключение JavaScript-файла -->
-<script src="/js/script.js"></script>
+<script src="/js/script.js">
+
+</script>
 </body>
 </html>

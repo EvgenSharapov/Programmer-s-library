@@ -37,6 +37,7 @@ const menuContent2 = `
 
 const menuContent3 = `
     <a href="#" id="add-test-button">Добавить тест</a>
+    <a href="#" id="add-library-button">Добавить тему</a>
     <a href="#" id="show-tests-button">Вывести все тесты</a>
     <a href="#">Редактировать тест</a>
     <a href="#">Удалить тест</a>
@@ -83,46 +84,6 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// Обработчик для формы "Создать тест"
-document.getElementById('test-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Предотвращаем отправку формы
-
-    // Получаем данные из формы
-    const question = document.getElementById('question').value;
-    const option1 = document.getElementById('option1').value;
-    const option2 = document.getElementById('option2').value;
-    const option3 = document.getElementById('option3').value;
-    const option4 = document.getElementById('option4').value;
-    const correctAnswer = document.querySelector('input[name="correct-answer"]:checked').value;
-
-    // Выводим данные в консоль (можно заменить на отправку на сервер)
-    console.log('Вопрос:', question);
-    console.log('Вариант 1:', option1);
-    console.log('Вариант 2:', option2);
-    console.log('Вариант 3:', option3);
-    console.log('Вариант 4:', option4);
-    console.log('Правильный ответ:', correctAnswer);
-
-    // Скрываем форму после отправки
-    addTestForm.style.display = 'none';
-});
-
-// Закрытие меню при клике вне его области
-window.addEventListener('click', function(event) {
-    if (
-        !event.target.matches('#user-button-1') &&
-        !event.target.matches('#user-button-2') &&
-        !event.target.matches('#user-button-3') &&
-        !dropdownMenu.contains(event.target)
-    ) {
-        dropdownMenu.classList.remove('show'); // Скрываем меню
-    }
-
-    // Закрытие формы при клике вне её области
-    if (event.target === addTestForm) {
-        addTestForm.style.display = 'none';
-    }
-});
 
 document.getElementById('test-form').addEventListener('submit', function(event) {
     event.preventDefault(); // Предотвращаем стандартную отправку формы
@@ -134,7 +95,6 @@ document.getElementById('test-form').addEventListener('submit', function(event) 
     const option3 = document.getElementById('option3').value;
     const option4 = document.getElementById('option4').value;
     const correctAnswer = document.querySelector('input[name="correct-answer"]:checked').value;
-    console.log("Данные формы:", { question, option1, option2, option3, option4, correctAnswer });
 
     // Создаем объект с данными
     const data = {
@@ -423,3 +383,89 @@ function clearContainersLibrary() {
 function hideAddTestForm() {
     addTestForm.style.display = 'none';
 }
+
+// Обработчик для кнопки "Добавить тему"
+document.addEventListener('click', function(event) {
+    if (event.target.id === 'add-library-button') {
+        event.preventDefault(); // Предотвращаем стандартное поведение ссылки
+
+        // Показываем форму добавления темы
+        showAddTopicForm();
+
+        // Заполняем выпадающий список областей
+        populateTopicAreas();
+    }
+});
+
+// Функция для отображения формы добавления темы
+function showAddTopicForm() {
+    const addTopicForm = document.getElementById('add-topic-form');
+    addTopicForm.style.display = 'block'; // Показываем форму
+}
+
+// Функция для заполнения выпадающего списка областей
+function populateTopicAreas() {
+    const topicAreaSelect = document.getElementById('topic-area');
+    topicAreaSelect.innerHTML = ''; // Очищаем старые опции
+
+    // Получаем все значения Enum (области тем)
+    const areas = Object.values(TopicArea);
+
+    // Добавляем опции в выпадающий список
+    areas.forEach(area => {
+        const option = document.createElement('option');
+        option.value = area;
+        option.textContent = area;
+        topicAreaSelect.appendChild(option);
+    });
+}
+
+// Обработчик для формы добавления темы
+document.getElementById('topic-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Предотвращаем стандартную отправку формы
+
+    // Собираем данные из формы
+    const title = document.getElementById('topic-title').value;
+    const content = document.getElementById('topic-content').value;
+    const area = document.getElementById('topic-area').value;
+
+
+
+    // Создаем объект с данными
+    const data = {
+        tableOfContents: title,
+        content: content,
+        area: area
+    };
+    console.log(data)
+    // Отправляем данные на сервер
+    fetch('/api/topics', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => response.json())
+        .then(result => {
+            alert('Тема успешно добавлена!');
+            console.log(result);
+            hideAddTopicForm(); // Скрываем форму после успешного добавления
+            loadAllTopics(); // Обновляем список тем
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            alert('Произошла ошибка при добавлении темы.');
+        });
+});
+
+// Функция для скрытия формы добавления темы
+function hideAddTopicForm() {
+    const addTopicForm = document.getElementById('add-topic-form');
+    addTopicForm.style.display = 'none';
+}
+
+// Обработчик для кнопки "Отмена"
+document.getElementById('cancel-topic-button').addEventListener('click', function() {
+    hideAddTopicForm(); // Скрываем форму
+});
