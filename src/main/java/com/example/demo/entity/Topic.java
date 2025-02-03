@@ -4,14 +4,14 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "topic")
+@Table(name = "topic_library")
 public class Topic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "table")
+    @Column(name = "themes")
     private String tableOfContents;
 
     @Lob

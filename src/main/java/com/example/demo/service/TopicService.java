@@ -20,20 +20,32 @@ public class TopicService {
     public TopicService(TopicRepository topicRepository) {
         this.topicRepository = topicRepository;
     }
+//
+//    @PostMapping
+//    public Topic createTopic(@RequestBody TopicRequest request) {
+//        System.out.println("Получен запрос: " + request);
+//        return saveTopic(request.getTableOfContents(), request.getContent(),request.getTopicArea());
+//    }
 
-    @PostMapping
-    public Topic createTopic(@RequestBody TopicRequest request) {
-        System.out.println("Получен запрос: " + request); // Логируем запрос
-        return saveTopic(request.getTableOfContents(), request.getContent(),request.getTopicArea());
+    public Topic createTopic(String tableOfContents,String content, TopicArea area) {
+        Topic topic = new Topic();
+        topic.setTableOfContents(tableOfContents);
+        topic.setContent(content);
+        topic.setTopicArea(area);
+        return topicRepository.save(topic);
     }
 
-    // Метод для сохранения вопроса
+
+
+
+
+    // Метод для сохранения темы
     public Topic saveTopic(String table, String content,TopicArea topicArea) {
         Topic topic = new Topic(table, content,topicArea);
         return topicRepository.save(topic);
     }
 
-    // Метод для получения всех вопросов
+    // Метод для получения всех тем
     public List<Topic> getAllTopics() {
         return topicRepository.findAll();
 
@@ -48,7 +60,7 @@ public class TopicService {
     }
     public List<String> getAllTopicTitles() {
        return topicRepository.findAll().stream()
-                .map(Topic::getTableOfContents) // Предполагаем, что заголовок хранится в поле tableOfContents
+                .map(Topic::getTableOfContents)
                 .toList();
 
     }
