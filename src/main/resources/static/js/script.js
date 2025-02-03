@@ -26,7 +26,6 @@ const addTestForm = document.getElementById('add-test-form');
 const menuContent1 = `
     <a href="/test">Пройти тест</a>
     <a href="#" id="show-library-button">Библиотека</a>
-    <a href="#" id="topic-button">Темы</a> 
 `;
 
 // Содержимое меню для второй кнопки
