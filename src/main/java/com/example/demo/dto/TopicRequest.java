@@ -9,7 +9,7 @@ public class TopicRequest {
 
     public String content;
 
-    public String topicArea;
+    public TopicArea topicArea;
 
 
 }

@@ -9,7 +9,8 @@ public enum TopicArea {
     MULTITHREADING,
     OTHER,
     COLLECTIONS,
-    TEST
+    TEST,
+    STREAM
 
 
 }
