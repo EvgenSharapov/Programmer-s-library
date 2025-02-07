@@ -25,7 +25,10 @@ header {
 
 #user-button-1,
 #user-button-2,
-#user-button-3 {
+#user-button-3,
+#user-button-4,
+#user-button-5
+{
     background-color: #444;
     border: none;
     padding: 10px;
@@ -39,7 +42,10 @@ header {
 
 #user-button-1:hover,
 #user-button-2:hover,
-#user-button-3:hover {
+#user-button-3:hover,
+#user-button-4:hover,
+#user-button-5:hover
+{
     background-color: #555;
 }
 
@@ -48,7 +54,12 @@ header {
     height: 24px;
 }
 
-#user-button-2 {
+#user-button-2,
+#user-button-3,
+#user-button-4,
+#user-button-5
+
+{
     color: white;
     font-size: 20px;
     border-radius: 50%;
@@ -56,13 +67,6 @@ header {
     height: 40px;
 }
 
-#user-button-3 {
-    color: white;
-    font-size: 20px;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-}
 
 /* Общий контейнер для меню */
 .dropdown-content {
@@ -92,7 +96,7 @@ header {
 }
 
 .dropdown-content a:hover {
-    background-color: #007bff; /* Цвет фона при наведении */
+    background-color: #6c757d; /* Цвет фона при наведении */
     color: white; /* Цвет текста при наведении */
 }
 

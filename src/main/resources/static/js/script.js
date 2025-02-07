@@ -63,6 +63,16 @@ const menuContent3 = `
     <a href="#">Редактировать тест</a>
     <a href="#">Удалить тест</a>
 `;
+// Содержимое меню для 4 кнопки
+const menuContent4 = `
+    <a href="#">Редактировать библиотеку</a>
+`;
+// Содержимое меню для 5 кнопки
+const menuContent5 = `
+    <a href="#">Поиск темы</a>
+`;
+
+
 
 // Обработчик для кнопки "Выход"
 document.addEventListener('click', function(event) {
@@ -72,7 +82,7 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// Обработчик для первой кнопки
+// Обработчик для 1 кнопки
 const userButton1 = document.getElementById('user-button-1');
 userButton1.addEventListener('click', function(event) {
     event.stopPropagation(); // Останавливаем всплытие события
@@ -80,20 +90,37 @@ userButton1.addEventListener('click', function(event) {
     dropdownMenu.classList.add('show'); // Показываем меню
 });
 
-// Обработчик для второй кнопки
+// Обработчик для 2 кнопки
 userButton2.addEventListener('click', function(event) {
     event.stopPropagation(); // Останавливаем всплытие события
     dropdownMenu.innerHTML = menuContent2; // Устанавливаем содержимое меню
     dropdownMenu.classList.add('show'); // Показываем меню
 });
 
-// Обработчик для третьей кнопки
+// Обработчик для 3 кнопки
 const userButton3 = document.getElementById('user-button-3');
 userButton3.addEventListener('click', function(event) {
     event.stopPropagation(); // Останавливаем всплытие события
     dropdownMenu.innerHTML = menuContent3; // Устанавливаем содержимое меню
     dropdownMenu.classList.add('show'); // Показываем меню
 });
+
+// Обработчик для 4 кнопки
+const userButton4 = document.getElementById('user-button-4');
+userButton4.addEventListener('click', function(event) {
+    event.stopPropagation(); // Останавливаем всплытие события
+    dropdownMenu.innerHTML = menuContent4; // Устанавливаем содержимое меню
+    dropdownMenu.classList.add('show'); // Показываем меню
+});
+// Обработчик для 5 кнопки
+const userButton5 = document.getElementById('user-button-5');
+userButton5.addEventListener('click', function(event) {
+    event.stopPropagation(); // Останавливаем всплытие события
+    dropdownMenu.innerHTML = menuContent5; // Устанавливаем содержимое меню
+    dropdownMenu.classList.add('show'); // Показываем меню
+});
+
+
 
 // Обработчик для кнопки "Добавить тест"
 document.addEventListener('click', function(event) {
