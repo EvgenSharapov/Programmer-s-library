@@ -240,18 +240,20 @@ code {
     z-index: 1; /* Устанавливаем z-index, чтобы контейнер был поверх */
 
 
+
     font-size: 18px; /* Увеличьте размер шрифта, если необходимо */
 }
 
 /* Стили для элемента темы */
 .topic-item {
-    margin: 10px 10px;
-    padding: 10px;
+    margin: 1px 1px;
+    padding: 1px;
     background-color: #ffffff;
     border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: background-color 0.3s;
+
 }
 
 .topic-item:hover {
@@ -307,7 +309,7 @@ code {
     margin-top: 10px;
     padding: 10px 20px;
     border: none;
-    background-color: #007bff;
+    background-color: #6c757d;
     color: white;
     border-radius: 4px;
     cursor: pointer;
@@ -318,3 +320,35 @@ code {
     margin-left: 10px;
 }
 
+/* Общий стиль для контейнера пагинации */
+.pagination-container {
+    display: flex; /* Используем flexbox для выравнивания элементов */
+    justify-content: flex-end; /* Выравниваем содержимое по правому краю */
+    margin-right: 20px; /* Внешние отступы для контейнера */
+}
+
+/* Стили для кнопок пагинации */
+.pagination-button {
+    background-color:  #6c757d; /* Цвет фона */
+    color: white; /* Цвет текста */
+    border: none; /* Убираем рамку */
+    border-radius: 5px; /* Скругление углов */
+    padding: 2px 2px; /* Внутренние отступы */
+    margin: 2px; /* Внешние отступы */
+    cursor: pointer; /* Изменяем курсор на указатель */
+    font-size: 20px; /* Размер шрифта */
+    transition: background-color 0.3s; /* Плавный переход фона */
+}
+
+
+
+/* Эффект при наведении */
+.pagination-button:hover {
+    background-color: #333333; /* Темнее фон при наведении */
+}
+
+/* Эффект для отключенной кнопки */
+.pagination-button:disabled {
+    background-color: #cccccc; /* Серый фон */
+    cursor: not-allowed; /* Курсор для отключенной кнопки */
+}

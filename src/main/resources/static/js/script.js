@@ -12,7 +12,12 @@ const TopicArea = {
     OTHER: 'OTHER',
     COLLECTIONS: 'COLLECTIONS',
     TEST : 'TEST',
-    STREAM : 'STREAM'
+    STREAM : 'STREAM',
+    SQL : 'SQL',
+    SERVLET : 'SERVLET',
+    JMS : 'JMS',
+    JDBC : 'JDBC',
+    HTTP : 'HTTP'
 
 
 };
@@ -28,7 +33,7 @@ document.addEventListener('click', function(event) {
     // Если клик произошел вне меню и не по кнопке, которая открывает меню
     // if (!dropdownMenu.contains(event.target) &&
     //     !event.target.matches('#user-button-1, #user-button-2, #user-button-3')) {
-        hideDropdownMenu(); // Скрываем меню
+    hideDropdownMenu(); // Скрываем меню
     // }
 });
 
@@ -278,8 +283,9 @@ function loadTopicsByArea(area) {
 }
 
 
-// Функция для отображения тем
-function displayTopics(topics) {
+
+// Функция для отображения тем с пагинацией
+function displayTopics(topics, page = 1, itemsPerPage = 12) {
     const container = document.createElement('div');
     container.id = 'topics-list-container';
     container.className = 'topics-list-container';
@@ -290,7 +296,13 @@ function displayTopics(topics) {
         return;
     }
 
-    topics.forEach(topic => {
+    // Вычисляем начальный и конечный индексы для текущей страницы
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedTopics = topics.slice(startIndex, endIndex);
+
+    // Отображаем темы для текущей страницы
+    paginatedTopics.forEach(topic => {
         const topicDiv = document.createElement('div');
         topicDiv.className = 'topic-item';
         topicDiv.innerHTML = `
@@ -304,11 +316,14 @@ function displayTopics(topics) {
     });
 
     // Очищаем старые контейнеры и добавляем новый
-    clearContainers();
+   clearContainersLibrary();
     document.body.appendChild(container);
 
+    // Добавляем пагинацию
+    addPagination(topics, page, itemsPerPage);
+
     // Выделяем первую тему после добавления контейнера в DOM
-    if (topics.length > 0) {
+    if (paginatedTopics.length > 0) {
         const firstTopic = container.querySelector('.topic-item'); // Теперь контейнер в DOM
         if (firstTopic) {
             setActiveTopic(firstTopic); // Выделяем первую тему
@@ -316,14 +331,46 @@ function displayTopics(topics) {
     }
 }
 
+// Функция для добавления пагинации
+function addPagination(topics, currentPage, itemsPerPage) {
+    const totalPages = Math.ceil(topics.length / itemsPerPage);
+
+    const paginationContainer = document.createElement('div');
+    paginationContainer.className = 'pagination-container';
+
+// Кнопка "Назад"
+    const prevButton = document.createElement('button');
+    clearPagination();
+    prevButton.innerHTML = '&larr;'; // Левый стрелка (←)
+    prevButton.disabled = currentPage === 1;
+    prevButton.classList.add('pagination-button', 'prev-button');
+    prevButton.addEventListener('click', () => {
+        displayTopics(topics, currentPage - 1, itemsPerPage);
+    });
+    paginationContainer.appendChild(prevButton);
+
+// Кнопка "Вперед"
+    const nextButton = document.createElement('button');
+    clearPagination();
+    nextButton.innerHTML = '&rarr;'; // Правый стрелка (→)
+    nextButton.disabled = currentPage === totalPages;
+    nextButton.classList.add('pagination-button', 'next-button');
+    nextButton.addEventListener('click', () => {
+        displayTopics(topics, currentPage + 1, itemsPerPage);
+    });
+    paginationContainer.appendChild(nextButton);
+
+// Добавляем пагинацию в DOM
+    document.body.appendChild(paginationContainer);
+}
+
+
+
 // Функция для выделения активной темы
 function setActiveTopic(activeTopic) {
-    const topics = document.querySelectorAll('.topic-item');
-    topics.forEach(topic => topic.classList.remove('active')); // Убираем выделение у всех тем
-
-    if (activeTopic) {
-        activeTopic.classList.add('active'); // Выделяем активную тему
-    }
+    const allTopics = document.querySelectorAll('.topic-item');
+    allTopics.forEach(topic => topic.classList.remove('active'));
+    activeTopic.classList.add('active');
 }
 
 
@@ -366,6 +413,8 @@ function clearContainers() {
         'topic-content-container',
         'areas-container',
 
+
+
     ];
 
     containers.forEach(id => {
@@ -375,15 +424,27 @@ function clearContainers() {
         }
     });
     hideAddTopicForm();
+
+
 }
+
+
+function clearPagination(){
+    const oldPagination = document.querySelector('.pagination-container');
+    if (oldPagination) {
+        oldPagination.remove();
+    }
+}
+
 // Функция для очистки старых контейнеров
 function clearContainersLibrary() {
     const containers = [
         'questions-container',
         'topics-container',
-        'topic-content-container',
+        // 'topic-content-container',
         'areas-container',
-        'topics-list-container'
+        'topics-list-container',
+
 
     ];
 

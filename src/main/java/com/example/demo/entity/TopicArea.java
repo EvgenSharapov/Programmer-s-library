@@ -10,7 +10,12 @@ public enum TopicArea {
     OTHER,
     COLLECTIONS,
     TEST,
-    STREAM
+    STREAM,
+    SQL,
+    SERVLET,
+    JMS,
+    JDBC,
+    HTTP
 
 
 }
