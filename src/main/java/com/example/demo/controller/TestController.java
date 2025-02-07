@@ -4,8 +4,8 @@ import com.example.demo.service.QuestionService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,17 +28,17 @@ public class TestController {
 
 
 
-    @GetMapping("/index")
-        public String showMenu(Model model) {
-            // Получаем информацию о текущем аутентифицированном пользователе
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            String username = authentication.getName(); // Имя пользователя
-
-            // Передаем имя пользователя в шаблон
-            model.addAttribute("username", username);
-
-            return "index"; // Главная страница с меню
-        }
+//    @GetMapping("/index")
+//        public String showMenu(Model model) {
+////            // Получаем информацию о текущем аутентифицированном пользователе
+////            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+////            String username = authentication.getName(); // Имя пользователя
+//
+//            // Передаем имя пользователя в шаблон
+//            model.addAttribute("username", username);
+//
+//            return "index"; // Главная страница с меню
+//        }
 
 
         @Transactional

@@ -201,7 +201,7 @@ document.addEventListener('click', function(event) {
         event.preventDefault(); // Предотвращаем стандартное поведение ссылки
 
         // Очищаем старые контейнеры
-        clearContainersLibrary();
+        clearContainersFull()
 
         // Скрываем форму добавления теста
         hideAddTestForm();
@@ -429,12 +429,51 @@ function clearContainers() {
 }
 
 
+
+
+// Функция для очистки старых контейнеров
+function clearContainersFull() {
+    const containers = [
+        'questions-container',
+        'topics-container',
+        'topic-content-container',
+        'areas-container',
+        'topics-list-container',
+
+
+    ];
+
+    containers.forEach(id => {
+        const container = document.getElementById(id);
+        if (container) {
+            container.remove();
+        }
+    });
+    hideAddTopicForm();
+    clearPagination()
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
 function clearPagination(){
     const oldPagination = document.querySelector('.pagination-container');
     if (oldPagination) {
         oldPagination.remove();
     }
 }
+
+
+
 
 // Функция для очистки старых контейнеров
 function clearContainersLibrary() {
@@ -469,7 +508,7 @@ document.addEventListener('click', function(event) {
     if (event.target.id === 'add-library-button') {
         event.preventDefault();// Предотвращаем стандартное поведение ссылки
 
-        clearContainersLibrary();
+        clearContainersFull()
         hideAddTestForm();
 
         // Показываем форму добавления темы
