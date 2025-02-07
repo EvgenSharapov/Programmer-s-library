@@ -63,6 +63,24 @@ import org.springframework.security.web.SecurityFilterChain;
                     );
 
             return http.build();
-        }
 
+
+
+
+
+//            http
+//                    .authorizeRequests()
+//                    .antMatchers("/css/**", "/js/**", "/images/**").permitAll() // Разрешить доступ к статическим ресурсам
+//                    .anyRequest().authenticated() // Остальные запросы требуют аутентификации
+//                    .and()
+//                    .formLogin()
+//                    .loginPage("/login")
+//                    .permitAll()
+//                    .and()
+//                    .logout()
+//                    .permitAll();
+//            return http.build();
+
+
+}
 }
