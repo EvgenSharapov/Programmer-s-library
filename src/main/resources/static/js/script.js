@@ -17,7 +17,8 @@ const TopicArea = {
     SERVLET : 'SERVLET',
     JMS : 'JMS',
     JDBC : 'JDBC',
-    HTTP : 'HTTP'
+    HTTP : 'HTTP',
+    ALGORITHMS : 'ALGORITHMS'
 
 
 };
@@ -29,7 +30,7 @@ function hideDropdownMenu() {
 }
 
 // Обработчик для клика вне меню
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function() {
     // Если клик произошел вне меню и не по кнопке, которая открывает меню
     // if (!dropdownMenu.contains(event.target) &&
     //     !event.target.matches('#user-button-1, #user-button-2, #user-button-3')) {
@@ -52,7 +53,7 @@ const menuContent1 = `
 // Содержимое меню для второй кнопки
 const menuContent2 = `
     <a href="#">Настройки</a>
-    <a href="#">Контакты</a>
+    <a href="#">Прогресс</a>
     <a href="#" id="logout-button">Выход</a>
 `;
 
@@ -60,9 +61,17 @@ const menuContent3 = `
     <a href="#" id="add-test-button">Добавить тест</a>
     <a href="#" id="add-library-button">Добавить тему</a>
     <a href="#" id="show-tests-button">Вывести все тесты</a>
-    <a href="#">Редактировать тест</a>
-    <a href="#">Удалить тест</a>
 `;
+// Содержимое меню для 4 кнопки
+const menuContent4 = `
+    <a href="#" id="edit-library-button">Редактировать библиотеку</a>
+`;
+// Содержимое меню для 5 кнопки
+const menuContent5 = `
+    <a href="#">Поиск темы</a>
+`;
+
+
 
 // Обработчик для кнопки "Выход"
 document.addEventListener('click', function(event) {
@@ -72,7 +81,7 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// Обработчик для первой кнопки
+// Обработчик для 1 кнопки
 const userButton1 = document.getElementById('user-button-1');
 userButton1.addEventListener('click', function(event) {
     event.stopPropagation(); // Останавливаем всплытие события
@@ -80,20 +89,37 @@ userButton1.addEventListener('click', function(event) {
     dropdownMenu.classList.add('show'); // Показываем меню
 });
 
-// Обработчик для второй кнопки
+// Обработчик для 2 кнопки
 userButton2.addEventListener('click', function(event) {
     event.stopPropagation(); // Останавливаем всплытие события
     dropdownMenu.innerHTML = menuContent2; // Устанавливаем содержимое меню
     dropdownMenu.classList.add('show'); // Показываем меню
 });
 
-// Обработчик для третьей кнопки
+// Обработчик для 3 кнопки
 const userButton3 = document.getElementById('user-button-3');
 userButton3.addEventListener('click', function(event) {
     event.stopPropagation(); // Останавливаем всплытие события
     dropdownMenu.innerHTML = menuContent3; // Устанавливаем содержимое меню
     dropdownMenu.classList.add('show'); // Показываем меню
 });
+
+// Обработчик для 4 кнопки
+const userButton4 = document.getElementById('user-button-4');
+userButton4.addEventListener('click', function(event) {
+    event.stopPropagation(); // Останавливаем всплытие события
+    dropdownMenu.innerHTML = menuContent4; // Устанавливаем содержимое меню
+    dropdownMenu.classList.add('show'); // Показываем меню
+});
+// Обработчик для 5 кнопки
+const userButton5 = document.getElementById('user-button-5');
+userButton5.addEventListener('click', function(event) {
+    event.stopPropagation(); // Останавливаем всплытие события
+    dropdownMenu.innerHTML = menuContent5; // Устанавливаем содержимое меню
+    dropdownMenu.classList.add('show'); // Показываем меню
+});
+
+
 
 // Обработчик для кнопки "Добавить тест"
 document.addEventListener('click', function(event) {
@@ -197,7 +223,7 @@ function displayQuestions(questions) {
 
 // Обработчик для кнопки "Библиотека"
 document.addEventListener('click', function(event) {
-    if (event.target.id === 'show-library-button') {
+    if (event.target.id === 'show-library-button' ) {
         event.preventDefault(); // Предотвращаем стандартное поведение ссылки
 
         // Очищаем старые контейнеры
@@ -219,6 +245,7 @@ document.addEventListener('click', function(event) {
 
     }
 });
+
 
 // Функция для отображения колонок
 function showColumns() {
@@ -439,6 +466,7 @@ function clearContainersFull() {
         'topic-content-container',
         'areas-container',
         'topics-list-container',
+        'areas-containerEdit'
 
 
     ];
@@ -599,3 +627,215 @@ document.getElementById('cancel-topic-button').addEventListener('click', functio
     hideAddTopicForm(); // Скрываем форму
     clearAddTopicForm(); // Очищаем поля формы
 });
+
+
+
+
+
+// Обработчик для кнопки "Редактировать библиотеку"
+document.addEventListener('click', function(event) {
+    if (event.target.id === 'edit-library-button') {
+        event.preventDefault(); // Предотвращаем стандартное поведение ссылки
+
+        // Очищаем старые контейнеры
+        clearContainersFull();
+
+        // Скрываем форму добавления теста
+        hideAddTestForm();
+
+        // Создаем выпадающие кнопки для каждой области
+        createAreaButtonsEdit();
+
+
+
+
+
+        const contentContainer = document.getElementById('topic-content-container1');
+        const topicsContainer = document.getElementById('topics-list-container1');
+        contentContainer.style.display = 'block'; // Показываем левую колонку
+        topicsContainer.style.display = 'block'; // Показываем правую колонку
+
+        // Загружаем все темы в режиме редактирования
+        loadAllTopicsForEditing();
+    }
+});
+
+
+// Функция для создания выпадающих кнопок по областям
+function createAreaButtonsEdit() {
+    const container = document.createElement('div');
+    container.id = 'areas-containerEdit';
+    container.style.display = 'flex'; // Используем flexbox для расположения кнопок
+    container.style.flexWrap = 'wrap'; // Перенос кнопок на новую строку, если не хватает места
+    container.style.gap = '20px'; // Отступы между кнопками
+    container.style.padding = '20px'; // Отступы внутри контейнера
+    container.style.justifyContent = 'center'; // Центрируем кнопки
+
+    // Получаем все значения Enum (области тем)
+    const areas = Object.values(TopicArea);
+
+    areas.forEach(area => {
+        const areaButton = document.createElement('button');
+        areaButton.textContent = area; // Название области
+        areaButton.className = 'area-button'; // Добавляем класс для стилизации
+        areaButton.dataset.area = area; // Сохраняем область в data-атрибуте
+        areaButton.addEventListener('click', () => loadAllTopicsForEditing(area)); // Обработчик клика
+        container.appendChild(areaButton);
+    });
+
+    // Добавляем контейнер на страницу
+    document.body.appendChild(container);
+}
+
+
+
+// Функция для загрузки всех тем в режиме редактирования
+function loadAllTopicsForEditing() {
+    clearContainersFull();
+    fetch('/api/topics')
+        .then(response => response.json())
+        .then(topics => {
+            displayTopicsForEditing(topics); // Отображаем список тем с возможностью редактирования
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            alert('Произошла ошибка при загрузке тем.');
+        });
+}
+
+// Функция для отображения тем с возможностью редактирования
+function displayTopicsForEditing(topics, page = 1, itemsPerPage = 12) {
+    const container = document.createElement('div');
+    container.id = 'topics-list-containerEdit';
+    container.className = 'topics-list-containerEdit';
+    container.innerHTML = '';
+
+
+    if (topics.length === 0) {
+        container.innerHTML = '<p>Темы не найдены.</p>';
+        return;
+    }
+
+    // Вычисляем начальный и конечный индексы для текущей страницы
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const paginatedTopics = topics.slice(startIndex, endIndex);
+
+
+
+    // Отображаем темы для текущей страницы
+    paginatedTopics.forEach(topic => {
+        const topicDiv = document.createElement('div');
+        topicDiv.className = 'topic-item';
+        topicDiv.innerHTML = `
+            <button class="edit-topic-button" data-topic-id="${topic.id}">Редактировать</button>
+            <button class="delete-topic-button" data-topic-id="${topic.id}">Удалить</button>
+            <p class="topic-title" data-topic-id="${topic.id}">${topic.tableOfContents}</p>
+         
+           
+        `;
+        topicDiv.querySelector('.edit-topic-button').addEventListener('click', () => {
+            loadTopicContentForEditing(topic.id); // Загружаем содержимое темы для редактирования
+        });
+        topicDiv.querySelector('.delete-topic-button').addEventListener('click', () => {
+            deleteTopic(topic.id); // Удаляем тему
+        });
+        container.appendChild(topicDiv);
+    });
+
+    // Очищаем старые контейнеры и добавляем новый
+    clearContainersLibrary();
+    document.body.appendChild(container);
+
+    // Добавляем пагинацию
+    addPagination(topics, page, itemsPerPage);
+}
+
+// Функция для удаления темы
+function deleteTopic(topicId) {
+    if (confirm('Вы уверены, что хотите удалить эту тему?')) {
+        fetch(`/api/topics/${topicId}`, {
+            method: 'DELETE',
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Тема успешно удалена!');
+                    loadAllTopicsForEditing(); // Перезагружаем список тем
+                } else {
+                    throw new Error('Ошибка при удалении темы');
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                alert('Произошла ошибка при удалении темы.');
+            });
+    }
+}
+
+// Функция для загрузки содержимого темы в режиме редактирования
+function loadTopicContentForEditing(topicId) {
+    fetch(`/api/topics/${topicId}`)
+        .then(response => response.json())
+        .then(topic => {
+            displayTopicContentForEditing(topic); // Отображаем содержимое темы для редактирования
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            alert('Произошла ошибка при загрузке содержимого темы.');
+        });
+}
+
+// Функция для отображения содержимого темы с возможностью редактирования
+function displayTopicContentForEditing(topic) {
+    const container = document.createElement('div');
+    container.id = 'topic-content-container1';
+    container.className = 'topic-content-container1';
+    container.innerHTML = `
+        <p><strong>Название темы:</strong></p>
+        <input type="text" id="edit-topic-title" value="${topic.tableOfContents}">
+        <p><strong>Содержание:</strong></p>
+        <textarea id="edit-topic-content">${topic.content}</textarea>
+        <button id="save-topic-button" data-topic-id="${topic.id}">Сохранить</button>
+        <button id="cancel-edit-button">Отмена</button>
+    `;
+
+    // Очищаем старые контейнеры и добавляем новый
+    clearContainers();
+    document.body.appendChild(container);
+
+    // Добавляем обработчик для кнопки "Сохранить"
+    document.getElementById('save-topic-button').addEventListener('click', () => {
+        saveTopicChanges(topic.id);
+    });
+
+    // Добавляем обработчик для кнопки "Отмена"
+    document.getElementById('cancel-edit-button').addEventListener('click', () => {
+        loadAllTopicsForEditing(); // Возвращаемся к списку тем
+    });
+}
+
+// Функция для сохранения изменений в теме
+function saveTopicChanges(topicId) {
+    const title = document.getElementById('edit-topic-title').value;
+    const content = document.getElementById('edit-topic-content').value;
+
+    fetch(`/api/topics/${topicId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            tableOfContents: title,
+            content: content,
+        }),
+    })
+        .then(response => response.json())
+        .then(updatedTopic => {
+            alert('Изменения сохранены успешно!');
+            loadTopicContentForEditing(updatedTopic.id); // Перезагружаем содержимое темы
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            alert('Произошла ошибка при сохранении изменений.');
+        });
+}

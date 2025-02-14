@@ -15,7 +15,8 @@ public enum TopicArea {
     SERVLET,
     JMS,
     JDBC,
-    HTTP
+    HTTP,
+    ALGORITHMS
 
 
 }
